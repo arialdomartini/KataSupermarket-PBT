@@ -5,10 +5,7 @@ namespace WithFsCheck;
 
 internal static class Generators
 {
-    internal static readonly Arbitrary<bool> Cases = Gen.Constant(true).ToArbitrary();
-    
     private static Gen<uint> Quantities => Arb.Generate<uint>();
-
 
     internal static Gen<uint> PositiveQuantities =>
         from quantity in Quantities
@@ -22,4 +19,15 @@ internal static class Generators
     internal static Gen<Product> Products =>
         from price in Prices
         select Product.Priced(price);
+
+    internal static Gen<Catalog> Catalogs()
+    {
+        return from products in Gen.ListOf(3, Products)
+            select Catalog.Of(products.ToArray());
+    }
+
+    internal static Gen<Product> RandomProductIn(Catalog catalog) =>
+        from randomIndex in Gen.Choose(0, catalog.Products.Length - 1)
+        let selectedProduct = catalog.Products[randomIndex]
+        select selectedProduct;
 }
