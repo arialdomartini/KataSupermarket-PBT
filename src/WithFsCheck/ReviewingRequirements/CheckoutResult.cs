@@ -7,5 +7,5 @@ internal abstract record CheckoutResult
 
     internal record SuccessCase(decimal Value) : CheckoutResult;
 
-    private record ErrorCase : CheckoutResult;
+    internal record ErrorCase : CheckoutResult;
 }

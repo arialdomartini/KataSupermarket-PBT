@@ -50,11 +50,3 @@ public class UserStories
         Prop.ForAll(Cases, _ => 
             CheckoutSystem.Checkout(0) == Error);
 }
-
-internal static class CheckoutSystem
-{
-    internal static CheckoutResult Checkout(uint numberOfApples) =>
-        numberOfApples > 0
-            ? Success(numberOfApples * 50)
-            : Error;
-}
