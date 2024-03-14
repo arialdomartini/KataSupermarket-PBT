@@ -5,7 +5,10 @@ namespace WithFsCheck;
 
 internal static class Generators
 {
+    internal static readonly Arbitrary<bool> Cases = Gen.Constant(true).ToArbitrary();
+    
     private static Gen<uint> Quantities => Arb.Generate<uint>();
+
 
     internal static Gen<uint> PositiveQuantities =>
         from quantity in Quantities

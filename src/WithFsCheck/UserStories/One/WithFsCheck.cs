@@ -1,12 +1,12 @@
 ﻿using FsCheck;
 using FsCheck.Xunit;
 using static WithFsCheck.CheckoutResult;
+using static WithFsCheck.Generators;
 
 namespace WithFsCheck.UserStories.One;
 
 public class WithFsCheck
 {
-    private static readonly Arbitrary<bool> Cases = Gen.Constant(true).ToArbitrary();
     /*
         Let's start with apples.
 
@@ -30,7 +30,7 @@ public class WithFsCheck
     [Property]
     Property sells_apples()
     {
-        var numbersOfApples = Generators.PositiveQuantities;
+        var numbersOfApples = PositiveQuantities;
 
         return Prop.ForAll(numbersOfApples.ToArbitrary(), numberOfApples =>
         {
