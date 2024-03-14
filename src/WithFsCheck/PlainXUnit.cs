@@ -1,4 +1,5 @@
 ﻿using WithFsCheck.ReviewingRequirements;
+using static WithFsCheck.ReviewingRequirements.CheckoutResult;
 using static WithFsCheck.ReviewingRequirements.PlainGenerators;
 
 namespace WithFsCheck;
@@ -9,20 +10,33 @@ public class PlainXUnit
     void sells_apples()
     {
         var numberOfApples = PositiveQuantity;
-        const uint priceOfOneApple = 50;
 
         var charged = CheckoutSystem.Checkout(numberOfApples);
 
-        var value = Assert.IsType<CheckoutResult.SuccessCase>(charged).Value;
-        Assert.Equal(numberOfApples * priceOfOneApple, value);
+        charged.Is(numberOfApples).TimesThePriceOfAnApple();
     }
-    
-    
+
+
     [Fact]
     void trying_to_check_out_no_apples_does_nothing()
     {
         var checkingOutNoApples = CheckoutSystem.Checkout(0);
         
-        Assert.IsType<CheckoutResult.ErrorCase>(checkingOutNoApples);
+        Assert.IsType<ErrorCase>(checkingOutNoApples);
     }
+}
+
+static class TestExtensions
+{
+    internal static (CheckoutResult charged, uint numberOfApples) Is(this CheckoutResult charged, uint numberOfApples) => 
+        (charged, numberOfApples);
+
+    internal static void TimesThePriceOfAnApple(this (CheckoutResult charged, uint numberOfApples) input)
+    {
+        const uint priceOfOneApple = 50;
+        var value = Assert.IsType<SuccessCase>(input.charged).Value;
+        Assert.Equal(input.numberOfApples * priceOfOneApple, value);
+    } 
+    
+    
 }
