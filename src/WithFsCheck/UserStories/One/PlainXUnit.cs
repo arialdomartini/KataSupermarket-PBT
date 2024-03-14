@@ -1,8 +1,7 @@
-﻿using WithFsCheck.ReviewingRequirements;
-using static WithFsCheck.ReviewingRequirements.CheckoutResult;
-using static WithFsCheck.ReviewingRequirements.PlainGenerators;
+﻿using static WithFsCheck.CheckoutResult;
+using static WithFsCheck.PlainGenerators;
 
-namespace WithFsCheck;
+namespace WithFsCheck.UserStories.One;
 
 public class PlainXUnit
 {
@@ -11,7 +10,7 @@ public class PlainXUnit
     {
         var numberOfApples = PositiveQuantity;
 
-        var charged = CheckoutSystem.Checkout(numberOfApples);
+        var charged = global::WithFsCheck.CheckoutSystem.Checkout(numberOfApples);
 
         charged.Is(numberOfApples).TimesThePriceOfAnApple();
     }
@@ -20,7 +19,7 @@ public class PlainXUnit
     [Fact]
     void trying_to_check_out_no_apples_does_nothing()
     {
-        var checkingOutNoApples = CheckoutSystem.Checkout(0);
+        var checkingOutNoApples = global::WithFsCheck.CheckoutSystem.Checkout(0);
         
         Assert.IsType<ErrorCase>(checkingOutNoApples);
     }
@@ -37,6 +36,4 @@ static class TestExtensions
         var value = Assert.IsType<SuccessCase>(input.charged).Value;
         Assert.Equal(input.numberOfApples * priceOfOneApple, value);
     } 
-    
-    
 }

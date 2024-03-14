@@ -1,6 +1,7 @@
-﻿using Random = System.Random;
+﻿using WithFsCheck.UserStories.One;
+using Random = System.Random;
 
-namespace WithFsCheck.ReviewingRequirements;
+namespace WithFsCheck;
 
 internal static class PlainGenerators
 {

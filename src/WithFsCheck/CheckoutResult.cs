@@ -1,4 +1,4 @@
-﻿namespace WithFsCheck.ReviewingRequirements;
+﻿namespace WithFsCheck;
 
 internal abstract record CheckoutResult
 {

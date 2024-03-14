@@ -1,6 +1,4 @@
-﻿using WithFsCheck.ReviewingRequirements;
-
-namespace WithFsCheck;
+﻿namespace WithFsCheck;
 
 internal static class CheckoutSystem
 {

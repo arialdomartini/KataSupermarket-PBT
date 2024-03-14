@@ -1,11 +1,10 @@
 ﻿using FsCheck;
 using FsCheck.Xunit;
-using WithFsCheck.ReviewingRequirements;
-using static WithFsCheck.ReviewingRequirements.CheckoutResult;
+using static WithFsCheck.CheckoutResult;
 
-namespace WithFsCheck;
+namespace WithFsCheck.UserStories.One;
 
-public class UserStories
+public class WithFsCheck
 {
     private static readonly Arbitrary<bool> Cases = Gen.Constant(true).ToArbitrary();
     /*
@@ -35,7 +34,7 @@ public class UserStories
 
         return Prop.ForAll(numbersOfApples.ToArbitrary(), numberOfApples =>
         {
-            var charged = CheckoutSystem.Checkout(numberOfApples);
+            var charged = global::WithFsCheck.CheckoutSystem.Checkout(numberOfApples);
             const uint priceOfOneApple = 50;
 
             return Assert
@@ -48,5 +47,5 @@ public class UserStories
     [Property]
     Property trying_to_check_out_no_apples_does_nothing() =>
         Prop.ForAll(Cases, _ => 
-            CheckoutSystem.Checkout(0) == Error);
+            global::WithFsCheck.CheckoutSystem.Checkout(0) == Error);
 }

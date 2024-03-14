@@ -1,6 +1,7 @@
 ﻿using FsCheck;
+using WithFsCheck.UserStories.One;
 
-namespace WithFsCheck.ReviewingRequirements;
+namespace WithFsCheck;
 
 internal static class Generators
 {

@@ -1,10 +1,10 @@
 ﻿using FsCheck;
 using FsCheck.Xunit;
-using static WithFsCheck.ReviewingRequirements.CheckoutResult;
+using static WithFsCheck.CheckoutResult;
 
-namespace WithFsCheck.ReviewingRequirements;
+namespace WithFsCheck.UserStories.One;
 
-public class UserStories
+public class ReviewingRequirements
 {
     /*
         Let's start with apples.
