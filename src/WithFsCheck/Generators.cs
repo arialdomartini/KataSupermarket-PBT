@@ -56,6 +56,9 @@ record DiscountPlan(Discount[] Discounts)
 
         return product;
     }
+
+    internal Price CalculatePrice(Product product, uint quantity) => 
+        PossiblyDiscounted(product, quantity).Price;
 }
 
 record Discount(Product Product, uint CutOffQuantity, Price DiscountedPrice);

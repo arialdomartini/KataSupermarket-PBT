@@ -24,7 +24,9 @@ Time to implement offers!
         - A Property Based Requirement would be probably more likely to
           mention domain names. 
           Here I chose: DiscountPlan, Discount, CutOffQuantity, DiscountedPrice
-        - Can I define multiple discounts for the same Product?   
+        - Can I define multiple discounts for the same Product?
+        - Can I buy 3 apples and 2 pears? The original requirement seems to imply
+          that only 1 kind of product can be purchased   
      */
 
     [Property]

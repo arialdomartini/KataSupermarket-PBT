@@ -1,4 +1,6 @@
-﻿namespace WithFsCheck;
+﻿using static WithFsCheck.CheckoutResult;
+
+namespace WithFsCheck;
 
 internal class CheckoutSystem
 {
@@ -11,13 +13,17 @@ internal class CheckoutSystem
         _discountPlan = discountPlan;
     }
 
-    public CheckoutResult Checkout(Product product, uint quantity) =>
-        quantity > 0 && _catalog.Products.Contains(product)
-            ? CheckoutResult.Success(CalculatePrice(product, quantity, _discountPlan).Times(quantity))
-            : CheckoutResult.Error;
-
-    private static Price CalculatePrice(Product product, uint quantity, DiscountPlan discountPlan) => 
-        discountPlan.PossiblyDiscounted(product, quantity).Price;
+    public CheckoutResult Checkout(Product product, uint quantity)
+    {
+        if (quantity > 0 && _catalog.Products.Contains(product))
+        {
+            var price = _discountPlan.CalculatePrice(product, quantity);
+            
+            return Success(price.Times(quantity));
+        }
+        else
+            return Error;
+    }
 
     internal static CheckoutSystem With(Catalog catalog) =>
         new(catalog, DiscountPlan.Empty);
