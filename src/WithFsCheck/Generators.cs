@@ -1,5 +1,4 @@
 ﻿using FsCheck;
-using WithFsCheck.UserStories.One;
 
 namespace WithFsCheck;
 

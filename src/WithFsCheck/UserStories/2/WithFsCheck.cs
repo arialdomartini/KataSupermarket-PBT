@@ -3,7 +3,7 @@ using FsCheck.Xunit;
 using static WithFsCheck.CheckoutResult;
 using static WithFsCheck.Generators;
 
-namespace WithFsCheck.UserStories.Two;
+namespace WithFsCheck.UserStories._2;
 
 public class WithFsCheck
 {

@@ -1,6 +1,6 @@
 ﻿using static WithFsCheck.PlainGenerators;
 
-namespace WithFsCheck.UserStories.Two;
+namespace WithFsCheck.UserStories._2;
 
 public class PlainXUnit
 {

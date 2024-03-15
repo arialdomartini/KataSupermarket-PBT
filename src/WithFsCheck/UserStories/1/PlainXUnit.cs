@@ -1,7 +1,7 @@
 ﻿using static WithFsCheck.CheckoutResult;
 using static WithFsCheck.PlainGenerators;
 
-namespace WithFsCheck.UserStories.One;
+namespace WithFsCheck.UserStories._1;
 
 public class PlainXUnit
 {
