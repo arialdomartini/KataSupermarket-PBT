@@ -26,7 +26,7 @@ internal static class Generators
     internal static Gen<Discount> Discount(Product product) =>
         from discountedPrice in Gen.Choose(1, (int)product.Price.Value)
         from cutOffQuantity in Gen.Choose(1, 10)
-        select new Discount(product, (uint)cutOffQuantity, discountedPrice);
+        select new Discount(product, (uint)cutOffQuantity, Price.Of(discountedPrice));
 
     internal static Gen<DiscountPlan> DiscountPlans(Catalog catalog) =>
         from discountedProductsNumber in Gen.Choose(1, catalog.Products.Length)
@@ -58,7 +58,7 @@ record DiscountPlan(Discount[] Discounts)
     }
 }
 
-record Discount(Product Product, uint CutOffQuantity, decimal DiscountedPrice);
+record Discount(Product Product, uint CutOffQuantity, Price DiscountedPrice);
 
 public static class EnumerableExtensions
 {

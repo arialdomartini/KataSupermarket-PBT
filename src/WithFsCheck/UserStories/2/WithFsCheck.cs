@@ -46,7 +46,7 @@ public class WithFsCheck
         return Prop.ForAll(useCases.ToArbitrary(), useCase =>
         {
             var (catalog, selectedProduct, quantity) = useCase;
-            var price = selectedProduct.Price.Value;
+            var price = selectedProduct.Price;
 
             var checkoutSystem = CheckoutSystem.With(catalog);
 
@@ -55,7 +55,7 @@ public class WithFsCheck
             return
                 Assert
                     .IsType<SuccessCase>(charged)
-                    .Value == quantity * price;
+                    .GrandTotal == price.Times(quantity);
         });
     }
 

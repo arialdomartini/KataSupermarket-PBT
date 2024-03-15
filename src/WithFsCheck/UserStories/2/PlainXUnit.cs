@@ -17,9 +17,9 @@ public class PlainXUnit
 
         var charged = checkoutSystem.Checkout(selectedProduct, quantity);
 
-        var chargedValue = Assert.IsType<CheckoutResult.SuccessCase>(charged).Value;
+        var chargedValue = Assert.IsType<CheckoutResult.SuccessCase>(charged).GrandTotal;
 
-        Assert.Equal(quantity * selectedProduct.Price.Value, chargedValue);
+        Assert.Equal(selectedProduct.Price.Times(quantity), chargedValue);
     }
 
     [Fact]

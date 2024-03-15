@@ -13,7 +13,7 @@ internal class CheckoutSystem
 
     public CheckoutResult Checkout(Product product, uint quantity) =>
         quantity > 0 && _catalog.Products.Contains(product)
-            ? CheckoutResult.Success(quantity * CalculatePrice(product, quantity, _discountPlan).Value)
+            ? CheckoutResult.Success(CalculatePrice(product, quantity, _discountPlan).Times(quantity))
             : CheckoutResult.Error;
 
     private static Price CalculatePrice(Product product, uint quantity, DiscountPlan discountPlan) => 

@@ -54,7 +54,7 @@ Time to implement offers!
         });
 
         bool PaysFullPrice(SuccessCase successCase, uint quantity, Product selectedProduct) => 
-            successCase.Value == quantity * selectedProduct.Price.Value;
+            successCase.GrandTotal == selectedProduct.Price.Times(quantity);
     }
     
     [Property]
@@ -79,7 +79,7 @@ Time to implement offers!
 
             return
                 Assert.IsType<SuccessCase>(charged)
-                    .Value == quantity * specificDiscount.DiscountedPrice;
+                    .GrandTotal == specificDiscount.DiscountedPrice.Times(quantity);
         });
     }
 }

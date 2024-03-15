@@ -5,7 +5,7 @@ namespace WithFsCheck.UserStories._1;
 
 public class PlainXUnit
 {
-    internal const uint PriceOfOneApple = 50;
+    internal static readonly Price PriceOfOneApple = Price.Of(50);
     
     [Fact]
     void sells_apples()
@@ -46,7 +46,7 @@ static class TestExtensions
 
     internal static void TimesThePriceOfAnApple(this (CheckoutResult charged, uint numberOfApples) input)
     {
-        var value = Assert.IsType<SuccessCase>(input.charged).Value;
-        Assert.Equal(input.numberOfApples * PlainXUnit.PriceOfOneApple, value);
+        var value = Assert.IsType<SuccessCase>(input.charged).GrandTotal;
+        Assert.Equal(PlainXUnit.PriceOfOneApple.Times(input.numberOfApples), value);
     } 
 }
