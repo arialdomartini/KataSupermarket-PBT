@@ -10,7 +10,7 @@ public class PlainXUnit
         var quantity = PositiveQuantity;
 
         var catalog = PlainGenerators.Catalog;
-        var checkoutSystem = new CheckoutSystem(catalog);
+        var checkoutSystem = CheckoutSystem.With(catalog);
 
         var selectedProduct = catalog.PickOne();
 
@@ -26,7 +26,7 @@ public class PlainXUnit
     void trying_to_check_out_no_products_returns_an_error()
     {
         var catalog = PlainGenerators.Catalog;
-        var checkoutSystem = new CheckoutSystem(catalog);
+        var checkoutSystem = CheckoutSystem.With(catalog);
 
         var selectedProduct = catalog.PickOne();
 
@@ -39,7 +39,7 @@ public class PlainXUnit
     void trying_to_check_out_a_product_not_in_catalog_returns_an_error()
     {
         var catalog = PlainGenerators.Catalog;
-        var checkoutSystem = new CheckoutSystem(catalog);
+        var checkoutSystem = CheckoutSystem.With(catalog);
 
         var productNotInCatalog = PlainGenerators.Product;
 

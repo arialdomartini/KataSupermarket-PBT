@@ -5,13 +5,13 @@ namespace WithFsCheck.UserStories._1;
 
 public class PlainXUnit
 {
-    internal const uint priceOfOneApple = 50;
+    internal const uint PriceOfOneApple = 50;
     
     [Fact]
     void sells_apples()
     {
         var (catalog, apple) = CatalogWithApplesOnly();
-        var checkoutSystem = new CheckoutSystem(catalog);
+        var checkoutSystem = CheckoutSystem.With(catalog);
 
         var numberOfApples = PositiveQuantity;
 
@@ -24,7 +24,7 @@ public class PlainXUnit
     void trying_to_check_out_no_apples_does_nothing()
     {
         var (catalog, apple) = CatalogWithApplesOnly();
-        var checkoutSystem = new CheckoutSystem(catalog);
+        var checkoutSystem = CheckoutSystem.With(catalog);
 
         var checkingOutNoApples = checkoutSystem.Checkout(apple, 0);
         
@@ -32,7 +32,7 @@ public class PlainXUnit
     }
 
     (Catalog, Product) CatalogWithApplesOnly()  {
-        var apple = Product.Priced(priceOfOneApple);
+        var apple = Product.Priced(PriceOfOneApple);
         var catalog = Catalog.Of([apple]);
         
         return (catalog, apple);
@@ -47,6 +47,6 @@ static class TestExtensions
     internal static void TimesThePriceOfAnApple(this (CheckoutResult charged, uint numberOfApples) input)
     {
         var value = Assert.IsType<SuccessCase>(input.charged).Value;
-        Assert.Equal(input.numberOfApples * PlainXUnit.priceOfOneApple, value);
+        Assert.Equal(input.numberOfApples * PlainXUnit.PriceOfOneApple, value);
     } 
 }

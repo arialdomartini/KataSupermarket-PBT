@@ -25,7 +25,7 @@ public class WithFsCheck
         * When I checkout 2 pineapples, the system charges 440 cents
         * When I checkout 2 bananas, the system charges 120 cents
 
-        Comment:
+        Comments:
         - I felt the need to express the domain notion of a catalog
         - is 3 products incidental?
         - what does this "so I can speed up the process" refer to?
@@ -48,7 +48,7 @@ public class WithFsCheck
             var (catalog, selectedProduct, quantity) = useCase;
             var price = selectedProduct.Price.Value;
 
-            var checkoutSystem = new CheckoutSystem(catalog);
+            var checkoutSystem = CheckoutSystem.With(catalog);
 
             var charged = checkoutSystem.Checkout(selectedProduct, quantity);
 
@@ -70,7 +70,7 @@ public class WithFsCheck
         return Prop.ForAll(useCases.ToArbitrary(), useCase =>
         {
             var (catalog, selectedProduct) = useCase;
-            var checkoutSystem = new CheckoutSystem(catalog);
+            var checkoutSystem = CheckoutSystem.With(catalog);
 
             var charged = checkoutSystem.Checkout(selectedProduct, 0);
 
@@ -90,7 +90,7 @@ public class WithFsCheck
         return Prop.ForAll(useCases.ToArbitrary(), useCase =>
         {
             var (catalog, productNotInCatalog) = useCase;
-            var checkoutSystem = new CheckoutSystem(catalog);
+            var checkoutSystem = CheckoutSystem.With(catalog);
 
             var charged = checkoutSystem.Checkout(productNotInCatalog, 0);
 
