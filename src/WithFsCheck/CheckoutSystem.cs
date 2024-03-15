@@ -1,6 +1,4 @@
-﻿using WithFsCheck.UserStories.One;
-
-namespace WithFsCheck;
+﻿namespace WithFsCheck;
 
 internal class CheckoutSystem
 {
