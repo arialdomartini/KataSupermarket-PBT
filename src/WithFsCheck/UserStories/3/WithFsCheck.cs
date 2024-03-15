@@ -26,7 +26,8 @@ Time to implement offers!
           Here I chose: DiscountPlan, Discount, CutOffQuantity, DiscountedPrice
         - Can I define multiple discounts for the same Product?
         - Can I buy 3 apples and 2 pears? The original requirement seems to imply
-          that only 1 kind of product can be purchased   
+          that only 1 kind of product can be purchased
+        - What if the discount defines a higher price?   
      */
 
     [Property]

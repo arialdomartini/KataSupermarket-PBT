@@ -43,10 +43,12 @@ internal static class Generators
 
 record DiscountPlan(Discount[] Discounts)
 {
-    public static DiscountPlan Empty => 
+    internal static DiscountPlan Of(Discount[] discounts) => new(discounts);
+    
+    internal static DiscountPlan Empty => 
         new(Array.Empty<Discount>());
 
-    internal Product PossiblyDiscounted(Product product, uint quantity)
+    private Product PossiblyDiscounted(Product product, uint quantity)
     {
         var discounted = Discounts.SingleOrDefault(d => d.Product == product);
         if (discounted != null && quantity >= discounted.CutOffQuantity)
@@ -61,7 +63,11 @@ record DiscountPlan(Discount[] Discounts)
         PossiblyDiscounted(product, quantity).Price;
 }
 
-record Discount(Product Product, uint CutOffQuantity, Price DiscountedPrice);
+record Discount(Product Product, uint CutOffQuantity, Price DiscountedPrice)
+{
+    internal static Discount Of(Product product, uint cutOffQuantity, Price discountedPrice) => 
+        new(product, cutOffQuantity, discountedPrice);
+}
 
 public static class EnumerableExtensions
 {
