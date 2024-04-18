@@ -29,10 +29,10 @@ public class Requirement1
     [Fact]
     void req1()
     {
-        var price = Price();
-        var name = ProductName();
-        var product = Product(name, price);
-        var quantity = PositiveQuantity();
+        var price = Generators.Price();
+        var name = Generators.ProductName();
+        var product = Generators.Product(name, price);
+        var quantity = Generators.PositiveQuantity();
 
         var checkoutSystem = new CheckoutSystem(product);
 
@@ -44,62 +44,16 @@ public class Requirement1
     [Fact]
     void checking_another_product()
     {
-        var name = ProductName();
-        var product = Product(name);
-        var quantity = PositiveQuantity();
+        var name = Generators.ProductName();
+        var product = Generators.Product(name);
+        var quantity = Generators.PositiveQuantity();
 
-        var anotherProductName = ANameOtherThan(name);
+        var anotherProductName = Generators.ANameOtherThan(name);
         var checkoutSystem = new CheckoutSystem(product);
 
         void AttemptToCheckoutANotExistingProduct() => 
             checkoutSystem.Checkout(anotherProductName, quantity);
 
         Assert.Throws<ProductNotFound>(AttemptToCheckoutANotExistingProduct);
-    }
-
-    private string ANameOtherThan(string name)
-    {
-        var randomName = ProductName();
-        if (randomName != name)
-            return randomName;
-        
-        return ANameOtherThan(name);
-    }
-
-    private int PositiveQuantity() => 
-        GeneratorExtensions.Random.Next(0, 1000);
-
-    private string[] _names = ["Apple", "Piano", "Cheese", "Keyboard", "Space Rocket"];
-    private string ProductName()
-    {
-        // return Guid.NewGuid().ToString();
-        return _names.PickOne();
-    }
-
-    private decimal Price() => new(GeneratorExtensions.Random.NextDouble());
-
-    private Product Product(string name) => new(name, Price());
-    private Product Product(string name, decimal price) => new(name, price);
-}
-
-internal class ProductNotFound : Exception;
-
-internal record Product(string Name, decimal Price);
-
-internal class CheckoutSystem
-{
-    private readonly Product _product;
-
-    internal CheckoutSystem(Product product)
-    {
-        _product = product;
-    }
-
-    public decimal Checkout(string name, int quantity)
-    {
-        if (name != _product.Name)
-            throw new ProductNotFound();
-        
-        return _product.Price * quantity;
     }
 }
