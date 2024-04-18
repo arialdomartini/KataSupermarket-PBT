@@ -37,13 +37,15 @@ public class Requirement1
     void req1()
     {
         var price = Price();
-        var name = ProductName();
+        var name = GetProductName();
         var product = Product(name, price);
         var quantity = PositiveQuantity();
 
         var checkoutSystem = new CheckoutSystem(product);
 
-        var total = checkoutSystem.Checkout(name, quantity);
+        checkoutSystem.Add(name, quantity);
+
+        var total = checkoutSystem.Checkout();
         
         Assert.Equal(price * quantity, total);
     }
@@ -51,7 +53,7 @@ public class Requirement1
     [Fact]
     void checking_another_product()
     {
-        var name = ProductName();
+        var name = GetProductName();
         var product = Product(name);
         var quantity = PositiveQuantity();
         var anotherProductName = ANameOtherThan(name);
@@ -59,7 +61,7 @@ public class Requirement1
         var checkoutSystem = new CheckoutSystem(product);
 
         void AttemptToCheckoutANotExistingProduct() => 
-            checkoutSystem.Checkout(anotherProductName, quantity);
+            checkoutSystem.Add(anotherProductName, quantity);
 
         Assert.Throws<ProductNotFound>(AttemptToCheckoutANotExistingProduct);
     }

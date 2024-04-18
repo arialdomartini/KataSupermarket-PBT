@@ -9,4 +9,11 @@ internal static class GeneratorExtensions
         var randomIndex = Random.Next(0, elements.Length);
         return elements[randomIndex];
     }
+
+
+    internal static IEnumerable<T> RandomlyPick<T>(this IEnumerable<T> items, int amount) => 
+        items.Shuffle().Take(amount);
+
+    private static IEnumerable<T> Shuffle<T>(this IEnumerable<T> items) => 
+        items.OrderBy(x => Guid.NewGuid());
 }
