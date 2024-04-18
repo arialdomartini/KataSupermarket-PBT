@@ -1,4 +1,6 @@
-﻿namespace WithFsCheck;
+﻿using static WithFsCheck.Generators;
+
+namespace WithFsCheck;
 
 public class Requirement1
 {
@@ -29,10 +31,10 @@ public class Requirement1
     [Fact]
     void req1()
     {
-        var price = Generators.Price();
-        var name = Generators.ProductName();
-        var product = Generators.Product(name, price);
-        var quantity = Generators.PositiveQuantity();
+        var price = Price();
+        var name = ProductName();
+        var product = Product(name, price);
+        var quantity = PositiveQuantity();
 
         var checkoutSystem = new CheckoutSystem(product);
 
@@ -44,11 +46,11 @@ public class Requirement1
     [Fact]
     void checking_another_product()
     {
-        var name = Generators.ProductName();
-        var product = Generators.Product(name);
-        var quantity = Generators.PositiveQuantity();
+        var name = ProductName();
+        var product = Product(name);
+        var quantity = PositiveQuantity();
+        var anotherProductName = ANameOtherThan(name);
 
-        var anotherProductName = Generators.ANameOtherThan(name);
         var checkoutSystem = new CheckoutSystem(product);
 
         void AttemptToCheckoutANotExistingProduct() => 
