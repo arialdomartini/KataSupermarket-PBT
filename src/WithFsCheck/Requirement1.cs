@@ -4,6 +4,10 @@ namespace WithFsCheck;
 
 public class Requirement1
 {
+    // Start making the system able to check an individual price:
+    // for now, the cashier will calculate discounts by hand.
+    // Then start implementing offers.
+    
     // Let's start with apples
     // As a cashier, 
     // I want a basic checkout system
@@ -16,6 +20,7 @@ public class Requirement1
     
     // As a property
     
+    // -I interpret "an individual price" as a generic property-
     // Let's start with -one single product-
     // As a cashier, 
     // I want a basic checkout system
