@@ -1,3 +1,3 @@
-﻿namespace WithFsCheck;
+﻿namespace WithoutFsCheck;
 
 internal class ProductNotFound : Exception;

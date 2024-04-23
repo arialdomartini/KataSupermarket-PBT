@@ -1,6 +1,6 @@
-﻿using static WithFsCheck.Generators;
+﻿using static WithoutFsCheck.Generators;
 
-namespace WithFsCheck;
+namespace WithoutFsCheck;
 
 // Implement individual price for other fruits in list: pear, pineapple, banana.
 //     No offers implemented, yet.

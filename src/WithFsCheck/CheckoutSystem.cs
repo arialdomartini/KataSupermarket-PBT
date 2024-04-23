@@ -1,4 +1,4 @@
-﻿namespace WithFsCheck;
+﻿namespace WithoutFsCheck;
 
 internal class CheckoutSystem
 {

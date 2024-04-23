@@ -1,6 +1,6 @@
-﻿using static WithFsCheck.Generators;
+﻿using static WithoutFsCheck.Generators;
 
-namespace WithFsCheck;
+namespace WithoutFsCheck;
 
 public class Requirement1
 {
