@@ -4,11 +4,8 @@ internal static class GeneratorExtensions
 {
     internal static readonly Random Random = new();
 
-    internal static string PickOne(this string[] elements)
-    {
-        var randomIndex = Random.Next(0, elements.Length);
-        return elements[randomIndex];
-    }
+    internal static T PickOne<T>(this T[] elements) => 
+        elements[Random.Next(0, elements.Length)];
 
 
     internal static IEnumerable<T> RandomlyPick<T>(this IEnumerable<T> items, int amount) => 

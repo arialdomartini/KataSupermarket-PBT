@@ -41,9 +41,7 @@ public class Requirement2
     void req2()
     {
         var products = Products();
-        var assortment = 
-            products.RandomlyPick(
-                PositiveQuantityUnder(products.Length));
+        var assortment = products.RandomlyPickSome();
         
         var checkoutSystem = new CheckoutSystem(products);
 

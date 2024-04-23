@@ -1,4 +1,7 @@
-﻿namespace WithoutFsCheck;
+﻿using static WithoutFsCheck.GeneratorExtensions;
+using Random = System.Random;
+
+namespace WithoutFsCheck;
 
 internal static class Generators
 {
@@ -21,7 +24,11 @@ internal static class Generators
 
     internal static string GetProductName() => RandomString;
 
-    internal static decimal Price() => new(GeneratorExtensions.Random.NextDouble());
+    internal static decimal PriceUnder(decimal maxPrice) => 
+        (decimal)GeneratorExtensions.Random.NextDouble() * maxPrice;
+    
+    internal static decimal Price() => PriceUnder(200);
+
     internal static Product Product(string name) => new(name, Price());
     internal static Product Product(string name, decimal price) => new(name, price);
 
@@ -31,4 +38,8 @@ internal static class Generators
             let price = Price()
             select new Product(name, price))
         .ToArray();
+
+    internal static IEnumerable<T> RandomlyPickSome<T>(this T[] items) =>
+        items.RandomlyPick(
+            PositiveQuantityUnder(items.Length));
 }
