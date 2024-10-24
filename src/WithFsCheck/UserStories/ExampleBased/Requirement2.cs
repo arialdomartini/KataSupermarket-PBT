@@ -1,4 +1,4 @@
-using WithFsCheck.Implementation;
+using WithFsCheck.UserStories.ExampleBased.Implementation;
 using Xunit;
 
 namespace WithFsCheck.UserStories.ExampleBased;

@@ -1,4 +1,4 @@
-namespace WithFsCheck.Implementation;
+namespace WithFsCheck.UserStories.ExampleBased.Implementation;
 
 internal class CheckoutSystem
 {
