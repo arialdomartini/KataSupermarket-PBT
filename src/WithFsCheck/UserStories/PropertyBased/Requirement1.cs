@@ -19,35 +19,35 @@ public class Requirement1
     // * When I checkout 3 apples, the system charges 150 cents
 
     [Property]
-    bool splitting_purchase(NonEmptyString productName, PositiveInt price, PositiveInt amountFirstBatch, PositiveInt amountSecondBatch)
+    bool splitting_purchase(NonEmptyString productName, PositiveInt price, PositiveInt quantityFirstBatch, PositiveInt quantitySecondBatch)
     {
         var checkoutSystem = CheckoutSystem
             .WithOneSingleProduct(productName.Get, price.Get);
 
-        checkoutSystem.Add(amountFirstBatch.Get, productName.Get);
-        checkoutSystem.Add(amountSecondBatch.Get, productName.Get);
+        checkoutSystem.Add(quantityFirstBatch.Get, productName.Get);
+        checkoutSystem.Add(quantitySecondBatch.Get, productName.Get);
 
         var checkoutSystem2 = CheckoutSystem
             .WithOneSingleProduct(productName.Get, price.Get);
 
-        checkoutSystem2.Add(amountFirstBatch.Get + amountSecondBatch.Get, productName.Get);
+        checkoutSystem2.Add(quantityFirstBatch.Get + quantitySecondBatch.Get, productName.Get);
 
         return checkoutSystem.Checkout() == checkoutSystem2.Checkout();
     }
 
-    record UseCase(NonEmptyString ProductName, PositiveInt AmountFirstBatch, PositiveInt AmountSecondBatch, PositiveInt Price);
+    record UseCase(NonEmptyString ProductName, PositiveInt QuantityFirstBatch, PositiveInt QuantitySecondBatch, PositiveInt Price);
 
     [Property]
     bool splitting_purchase_2(UseCase useCase)
     {
-        var (productName, price, amount1, amount2) = useCase;
+        var (productName, price, quantity1, quantity2) = useCase;
 
         var split = CheckoutSystem.WithOneSingleProduct(productName.Get, price.Get);
-        split.Add(amount1.Get, productName.Get);
-        split.Add(amount2.Get, productName.Get);
+        split.Add(quantity1.Get, productName.Get);
+        split.Add(quantity2.Get, productName.Get);
 
         var oneShot = CheckoutSystem.WithOneSingleProduct(productName.Get, price.Get);
-        oneShot.Add(amount1.Get + amount2.Get, productName.Get);
+        oneShot.Add(quantity1.Get + quantity2.Get, productName.Get);
 
         return split.Checkout() == oneShot.Checkout();
     }

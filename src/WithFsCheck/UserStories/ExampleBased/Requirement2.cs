@@ -39,11 +39,11 @@ public class Requirement2
     [InlineData(2, "pear", 60)]
     [InlineData(2, "pineapple", 440)]
     [InlineData(2, "banana", 120)]
-    void multiple_fruits(int amount, string fruit, int expectedTotal)
+    void multiple_fruits(int quantity, string fruit, int expectedTotal)
     {
         var checkoutSystem = CheckoutSystem.WithoutDiscounts();
         
-        checkoutSystem.Add(amount, fruit);
+        checkoutSystem.Add(quantity, fruit);
         
         Assert.Equal(expectedTotal, checkoutSystem.Checkout());
     }

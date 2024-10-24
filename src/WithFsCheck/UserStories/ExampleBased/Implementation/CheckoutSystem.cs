@@ -24,11 +24,11 @@ internal class CheckoutSystem
 
     internal static CheckoutSystem WithoutDiscounts() => WithDiscount(Promotion.NoDiscount());
 
-    internal void Add(int amount, string fruit)
+    internal void Add(int quantity, string fruit)
     {
-        if (!_cart.TryAdd(fruit, amount))
+        if (!_cart.TryAdd(fruit, quantity))
         {
-            _cart[fruit] += amount;
+            _cart[fruit] += quantity;
         }
     }
 
@@ -42,16 +42,16 @@ internal class CheckoutSystem
         var subTotals = _cart.Select(cartItem =>
         {
             var fruit = cartItem.Key;
-            var amount = cartItem.Value;
+            var quantity = cartItem.Value;
 
             var promotion = _promotions.SingleOrDefault(d => d.Product == fruit);
 
             var toBeDiscounted =
-                promotion != null && amount >= promotion.Threshold
-                    ? promotion.DiscountAmount
+                promotion != null && quantity >= promotion.Threshold
+                    ? promotion.DiscountQuantity
                     : 0;
 
-            return _prices[fruit] * amount - toBeDiscounted;
+            return _prices[fruit] * quantity - toBeDiscounted;
         });
 
         return subTotals.Sum();

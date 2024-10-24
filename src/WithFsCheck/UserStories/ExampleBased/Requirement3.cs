@@ -18,13 +18,13 @@ public class Requirement3
     [InlineData(3, "apple", 130, 3, 20)]
     [InlineData(2, "pear", 45, 2, 15)]
     [InlineData(2, "pineapple", 440, 0, 0)]
-    void single_offer(int amount, string fruit, int expectedTotal, int threshold, int discountAmount)
+    void single_offer(int quantity, string fruit, int expectedTotal, int threshold, int discountQuantity)
     {
-        var promotion = new Promotion(fruit, threshold, discountAmount);
+        var promotion = new Promotion(fruit, threshold, discountQuantity);
      
         var checkoutSystem = CheckoutSystem.WithDiscount(promotion);
         
-        checkoutSystem.Add(amount, fruit);
+        checkoutSystem.Add(quantity, fruit);
         
         Assert.Equal(expectedTotal, checkoutSystem.Checkout());
     }
