@@ -1,6 +1,6 @@
 using FsCheck;
 
-namespace WithFsCheck.UserStories;
+namespace WithFsCheck.UserStories.PropertyBased;
 
 internal static class PropertyExtension
 {
