@@ -28,7 +28,7 @@ public class Requirement2
     [InlineData("banana", 60)]
     void different_fruits(string fruit, int expectedTotal)
     {
-        var checkoutSystem = new CheckoutSystem();
+        var checkoutSystem = CheckoutSystem.WithoutDiscounts();
         
         checkoutSystem.Add(fruit);
         
@@ -41,7 +41,7 @@ public class Requirement2
     [InlineData(2, "banana", 120)]
     void multiple_fruits(int amount, string fruit, int expectedTotal)
     {
-        var checkoutSystem = new CheckoutSystem();
+        var checkoutSystem = CheckoutSystem.WithoutDiscounts();
         
         checkoutSystem.Add(amount, fruit);
         

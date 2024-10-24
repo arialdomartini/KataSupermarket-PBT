@@ -3,7 +3,7 @@ namespace WithFsCheck.Implementation;
 internal class CheckoutSystem
 {
     private Dictionary<string, int> _cart = new Dictionary<string, int>();
-    private readonly Discount _discount;
+    private readonly IEnumerable<Promotion> _promotions;
 
     private readonly Dictionary<string, int> _prices = new Dictionary<string, int>
     {
@@ -13,15 +13,16 @@ internal class CheckoutSystem
         { "banana", 60 },
     };
 
-    internal CheckoutSystem()
+    private CheckoutSystem(IEnumerable<Promotion> promotions)
     {
-        _discount = Discount.NoDiscount();
+        _promotions = promotions;
     }
 
-    public CheckoutSystem(Discount discount)
-    {
-        _discount = discount;
-    }
+    internal static CheckoutSystem WithDiscounts(IEnumerable<Promotion> discounts) => new(discounts);
+
+    internal static CheckoutSystem WithDiscount(Promotion promotion) => WithDiscounts([promotion]);
+
+    internal static CheckoutSystem WithoutDiscounts() => WithDiscount(Promotion.NoDiscount());
 
     internal void Add(int amount, string fruit)
     {
@@ -43,11 +44,16 @@ internal class CheckoutSystem
             var fruit = cartItem.Key;
             var amount = cartItem.Value;
 
-            var toBeDiscounted = amount >= _discount.Threshold ? _discount.DiscountAmount : 0;
-            
+            var promotion = _promotions.SingleOrDefault(d => d.Product == fruit);
+
+            var toBeDiscounted =
+                promotion != null && amount >= promotion.Threshold
+                    ? promotion.DiscountAmount
+                    : 0;
+
             return _prices[fruit] * amount - toBeDiscounted;
         });
-        
+
         return subTotals.Sum();
     }
 }

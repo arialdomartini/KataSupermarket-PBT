@@ -18,13 +18,29 @@ public class Requirement3
     [InlineData(3, "apple", 130, 3, 20)]
     [InlineData(2, "pear", 45, 2, 15)]
     [InlineData(2, "pineapple", 440, 0, 0)]
-    void multiple_fruits(int amount, string fruit, int expectedTotal, int threshold, int discountAmount)
+    void single_offer(int amount, string fruit, int expectedTotal, int threshold, int discountAmount)
     {
-        var discount = new Discount(fruit, threshold, discountAmount);
-        var checkoutSystem = new CheckoutSystem(discount);
+        var promotion = new Promotion(fruit, threshold, discountAmount);
+     
+        var checkoutSystem = CheckoutSystem.WithDiscount(promotion);
         
         checkoutSystem.Add(amount, fruit);
         
         Assert.Equal(expectedTotal, checkoutSystem.Checkout());
+    }
+
+    [Fact]
+    void multiple_offers()
+    {
+        var promotionForApple = new Promotion("apple", 3, 20);
+        var promotionForPear = new Promotion("pear", 2, 15);
+
+        Promotion[] promotions = [promotionForApple, promotionForPear];
+        var checkoutSystem = CheckoutSystem.WithDiscounts(promotions);
+        
+        checkoutSystem.Add(4, "apple");
+        checkoutSystem.Add(4, "pear");
+        
+        Assert.Equal(50*4 - 20 + 30*4 - 15, checkoutSystem.Checkout());
     }
 }

@@ -19,7 +19,7 @@ public class Requirement1
     [Fact]
     void checkout_1_apple()
     {
-        var checkoutSystem = new CheckoutSystem();
+        var checkoutSystem = CheckoutSystem.WithoutDiscounts();
 
         checkoutSystem.Add("apple");
 
@@ -29,7 +29,7 @@ public class Requirement1
     [Fact]
     void checkout_3_apples()
     {
-        var checkoutSystem = new CheckoutSystem();
+        var checkoutSystem = CheckoutSystem.WithoutDiscounts();
         
         checkoutSystem.Add("apple");
         checkoutSystem.Add("apple");
