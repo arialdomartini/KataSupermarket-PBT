@@ -66,7 +66,7 @@ public class Requirement1
     }
     
     [Fact]
-    void checkout_vuoto()
+    void non_gestisce_i_clienti_successivi()
     {
         var regitratoreDiCassa = new RegitratoreDiCassa();
         {
@@ -84,7 +84,7 @@ public class Requirement1
     }
 
     [Fact]
-    void non_gestisce_i_clienti_successivi()
+    void checkout_vuoto()
     {
         var regitratoreDiCassa = new RegitratoreDiCassa();
 
@@ -98,14 +98,24 @@ public class Requirement1
 internal class RegitratoreDiCassa
 {
     private int _numeroMele;
+    private int _numeroPere;
+    private int _numeroAnanas;
+    private int _numeroBanane;
 
     internal void Scansiona(string prodotto)
     {
-        _numeroMele++;
+        if(prodotto=="mela")
+            _numeroMele++;
+        if(prodotto=="pera")
+            _numeroPere++;
+        if(prodotto=="ananas")
+            _numeroAnanas++;
+        if(prodotto=="banana")
+            _numeroBanane++;
     }
 
     internal int Checkout()
     {
-        return 50 * _numeroMele;
+        return 50 * _numeroMele + 220 * _numeroAnanas + 30 * _numeroPere + 60 *_numeroBanane;
     }
 }
