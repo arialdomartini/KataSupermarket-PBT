@@ -17,25 +17,95 @@ public class Requirement1
     // * When I checkout 3 apples, the system charges 150 cents
 
     [Fact]
-    void checkout_1_apple()
+    void una_mela_costa_50()
     {
-        var checkoutSystem = CheckoutSystem.WithoutDiscounts();
+        var regitratoreDiCassa = new RegitratoreDiCassa();
+        
+        regitratoreDiCassa.Scansiona("mela");
 
-        checkoutSystem.Add("apple");
+        var totale = regitratoreDiCassa.Checkout();
+        
+        Assert.Equal(50, totale);
+    }
+    
+    // n acquisti == un acquisto da n
+    // 
+    [Fact]
+    void tre_mele_costano_150()
+    {
+        var regitratoreDiCassa = new RegitratoreDiCassa();
+        
+        regitratoreDiCassa.Scansiona("mela");
+        regitratoreDiCassa.Scansiona("mela");
+        regitratoreDiCassa.Scansiona("mela");
 
-        Assert.Equal(50, checkoutSystem.Checkout());
+        var totale = regitratoreDiCassa.Checkout();
+        
+        Assert.Equal(150, totale);
+    }
+    
+    // per qualsiasi nome prodotto diamo
+    // per qualsisi numero di Scansiona 
+    // totale = 50 * numero prodotti   <--
+    
+    // totale(n+1) = totale + prezzoMela
+    
+    
+    [Fact]
+    void zona_grigia_ignora_il_nome_del_prodotto()
+    {
+        var regitratoreDiCassa = new RegitratoreDiCassa();
+        
+        regitratoreDiCassa.Scansiona(prodottoRandom());
+        regitratoreDiCassa.Scansiona(prodottoRandom());
+        regitratoreDiCassa.Scansiona(prodottoRandom());
+
+        var totale = regitratoreDiCassa.Checkout();
+        
+        Assert.Equal(150, totale);
+    }
+    
+    [Fact]
+    void checkout_vuoto()
+    {
+        var regitratoreDiCassa = new RegitratoreDiCassa();
+        {
+            regitratoreDiCassa.Scansiona("mela");
+            int totale = regitratoreDiCassa.Checkout();
+
+            Assert.Equal(50, totale);
+        }
+        {
+            regitratoreDiCassa.Scansiona("mela");
+            int totale = regitratoreDiCassa.Checkout();
+
+            Assert.Equal(50, totale);
+        }
     }
 
     [Fact]
-    void checkout_3_apples()
+    void non_gestisce_i_clienti_successivi()
     {
-        var checkoutSystem = CheckoutSystem.WithoutDiscounts();
-        
-        checkoutSystem.Add("apple");
-        checkoutSystem.Add("apple");
-        checkoutSystem.Add("apple");
-        
-        Assert.Equal(150, checkoutSystem.Checkout());
+        var regitratoreDiCassa = new RegitratoreDiCassa();
+
+        int totale = regitratoreDiCassa.Checkout();
+        Assert.Equal(0, totale);
     }
-    
+
+    private string prodottoRandom() => Guid.NewGuid().ToString();
+}
+
+internal class RegitratoreDiCassa
+{
+    private int _numeroMele;
+
+    internal void Scansiona(string prodotto)
+    {
+        _numeroMele++;
+    }
+
+    internal int Checkout()
+    {
+        return 50 * _numeroMele;
+    }
 }
