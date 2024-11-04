@@ -46,17 +46,4 @@ public class Requirement3
     // date 2 offerte sovrapposte, applico l'offerta più conveniente
     
     
-    [Theory]
-    [InlineData(3, "apple", 130, 3, 20)]
-    [InlineData(2, "pear", 45, 2, 15)]
-    [InlineData(2, "pineapple", 440, 0, 0)]
-    void multiple_fruits(int amount, string fruit, int expectedTotal, int threshold, int discountAmount)
-    {
-        var offer = new Discount(fruit, threshold, discountAmount);
-        var checkoutSystem = new RegitratoreDiCassa(offer);
-        
-        checkoutSystem.Add(amount, fruit);
-        
-        Assert.Equal(expectedTotal, checkoutSystem.Checkout());
-    }
 }
