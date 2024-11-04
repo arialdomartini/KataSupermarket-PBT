@@ -5,6 +5,8 @@ namespace WithFsCheck;
 
 public class DummyTest
 {
+    private Gen<int> Numbers = Arb.Generate<int>();
+
     [Fact]
     void just_passes()
     {
@@ -20,18 +22,27 @@ public class DummyTest
 
         return Prop.ForAll(numbers.ToArbitrary(), n =>
         {
-            Assert.True(SomeProperty(n)); 
+            Assert.True(n * n >= 0); 
+        });
+    }
+    
+    [Property]
+    Property returning_predicate()
+    {
+        var numbers = Arb.Generate<int>();
+
+        return Prop.ForAll(numbers.ToArbitrary(), n =>
+        {
+            Assert.True(n * n >= 0); 
         });
     }
 
     [Property]
-    Property always_satisfied_property_returning_predicate()
-    {
-        var numbers = Arb.Generate<int>();
-
-        return Prop.ForAll(numbers.ToArbitrary(), SomeProperty);
-    }
+    Property using_externalsFields() =>
+        Prop.ForAll(Numbers.ToArbitrary(), 
+            SomeProperty);
 
     [Property]
-    bool always_satisfied_property_receiving_a_parameter(int n) => SomeProperty(n);
+    bool receiving_a_parameter(int n) => 
+        n * n >= 0;
 }

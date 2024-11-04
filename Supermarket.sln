@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EBD65373-986
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithFsCheck", "src\WithFsCheck\WithFsCheck.csproj", "{21FE3D27-ADDB-4CF0-BAA8-C56D2BC7633C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleBased", "src\ExampleBased\ExampleBased.csproj", "{592623E9-903F-4910-ABF7-D1BEC8AA0425}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +22,13 @@ Global
 		{21FE3D27-ADDB-4CF0-BAA8-C56D2BC7633C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21FE3D27-ADDB-4CF0-BAA8-C56D2BC7633C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21FE3D27-ADDB-4CF0-BAA8-C56D2BC7633C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{592623E9-903F-4910-ABF7-D1BEC8AA0425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592623E9-903F-4910-ABF7-D1BEC8AA0425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592623E9-903F-4910-ABF7-D1BEC8AA0425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592623E9-903F-4910-ABF7-D1BEC8AA0425}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{21FE3D27-ADDB-4CF0-BAA8-C56D2BC7633C} = {EBD65373-9865-4FB5-BBDC-40E84E478BF9}
+		{592623E9-903F-4910-ABF7-D1BEC8AA0425} = {EBD65373-9865-4FB5-BBDC-40E84E478BF9}
 	EndGlobalSection
 EndGlobal

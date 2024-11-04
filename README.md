@@ -31,3 +31,9 @@ dotnet add .\WithFsCheck\WithFsCheck.csproj package fscheck.xunit
 cd ..
 dotnet sln ./Supermarket.sln add ./src/WithFsCheck/WithFsCheck.csproj
 ```
+
+
+# Requirements
+
+* [English](docs/english/Requirements.md)
+* Italiano
