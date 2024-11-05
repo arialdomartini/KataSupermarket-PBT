@@ -8,7 +8,22 @@ public abstract record Product
 record Apple : Product
 {
     internal override string Name => "apple";
-};
+}
+
+record Pear : Product
+{
+    internal override string Name => "pear";
+}
+
+record Pineapple : Product
+{
+    internal override string Name => "pineapple";
+}
+
+record Banana : Product
+{
+    internal override string Name => "banana";
+}
 
 internal class Cart
 {

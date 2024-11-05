@@ -88,7 +88,7 @@ public class Requirement1
             from product in Arb.Generate<string>()
             where product != new Apple().Name
             select product;
-        
+
         return Prop.ForAll(names.ToArbitrary(), name =>
         {
             var cart = new Cart();
@@ -104,6 +104,11 @@ public class ProductGenerator
 {
     public static Arbitrary<Product> Product() =>
         Arb.From(
-            from product in Gen.Elements((Product)new Apple())
+            from product in
+                Gen.Elements(
+                    (Product)new Apple(),
+                    new Pear(),
+                    new Pineapple(),
+                    new Banana())
             select product);
 }
