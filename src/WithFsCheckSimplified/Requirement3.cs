@@ -108,6 +108,24 @@ public class Requirement3Simplified
 
         return discountedTotal < total;
     }
+
+    [Property(Arbitrary = [typeof(MyGen)])]
+    bool it_always_apply_the_most_convenient_of_the_active_promotions(List<Product> products, List<Promotion> promotions, List<Product> boughtProducts)
+    {
+        var discountedTotal =
+            new CheckoutSystem(products, promotions)
+                .ScanAll(boughtProducts)
+                .Checkout();
+
+        var singleTotals = promotions.Select(
+            singlePromotion =>
+                new CheckoutSystem(products, [singlePromotion])
+                    .ScanAll(boughtProducts)
+                    .Checkout()
+        );
+
+        return singleTotals.All(total => total >= discountedTotal);
+    }
 }
 
 static class TestExtensions
