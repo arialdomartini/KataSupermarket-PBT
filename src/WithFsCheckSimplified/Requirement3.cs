@@ -126,11 +126,30 @@ public class Requirement3Simplified
 
         return singleTotals.All(total => total >= discountedTotal);
     }
+
+
+    [Property(Arbitrary = [typeof(MyGen)])]
+    bool total_is_not_influenced_by_scan_order(List<Product> products, List<Promotion> promotions, List<Product> boughtProducts)
+    {
+        var checkoutSystem = new CheckoutSystem(products, promotions);
+
+        var total =
+            checkoutSystem
+                .ScanAll(boughtProducts)
+                .Checkout();
+
+        var totalWithDifferentOrder =
+            checkoutSystem
+                .ScanAll(boughtProducts.Shuffled())
+                .Checkout();
+
+        return totalWithDifferentOrder == total;
+    }
 }
 
 static class TestExtensions
 {
-    internal static CheckoutSystem ScanAll(this CheckoutSystem checkoutSystem, List<Product> boughtProducts)
+    internal static CheckoutSystem ScanAll(this CheckoutSystem checkoutSystem, IEnumerable<Product> boughtProducts)
     {
         foreach (var boughtProduct in boughtProducts)
             checkoutSystem.Scan(boughtProduct.Name);
@@ -138,4 +157,7 @@ static class TestExtensions
     }
 
     internal static List<Promotion> NoPromotions => [];
+
+    internal static IEnumerable<T> Shuffled<T>(this IEnumerable<T> xs) =>
+        xs.OrderBy(_ => Guid.NewGuid());
 }
