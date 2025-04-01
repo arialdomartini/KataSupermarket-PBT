@@ -1,10 +1,10 @@
 ﻿using FsCheck;
 using FsCheck.Xunit;
-using static WithFsCheck.TestExtensions;
+using static WithFsCheckSimplified.TestExtensions;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace WithFsCheck;
+namespace WithFsCheckSimplified;
 
 public record Product(
     string Name,
